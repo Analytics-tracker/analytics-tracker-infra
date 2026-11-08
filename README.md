@@ -40,6 +40,38 @@ Analytics Tracker là hệ thống thu thập và phân tích lưu lượng webs
 Script bootstrap: [`scripts/bootstrap-repos.sh`](scripts/bootstrap-repos.sh).
 Mẫu ADR: [`docs/adr/0000-template.md`](docs/adr/0000-template.md).
 
+## Chạy hạ tầng dev
+
+Yêu cầu: Docker và Docker Compose v2, `make`, RAM trống tối thiểu khoảng 4 GB cho cấu hình mặc định.
+
+```bash
+cp .env.example .env
+make up          # Kafka (KRaft), Kafka UI, Redis
+make ps          # xem trạng thái
+make smoke       # kiểm tra nhanh Kafka và Redis
+```
+
+| Lệnh | Tác dụng |
+|---|---|
+| `make up-db` | Thêm Postgres và ClickHouse |
+| `make up-obs` | Thêm Prometheus và Grafana |
+| `make topics` | Liệt kê topic Kafka |
+| `make consume` | Đọc `events.raw.v1` từ đầu |
+| `make down` | Dừng, giữ dữ liệu |
+| `make reset` | Dừng và xoá dữ liệu |
+
+| Dịch vụ | Địa chỉ trên máy host |
+|---|---|
+| Kafka | `localhost:9092` |
+| Kafka UI | http://localhost:8088 |
+| Redis | `localhost:6379` |
+| Postgres (profile `db`) | `localhost:5432` |
+| ClickHouse (profile `db`) | `localhost:8123` (HTTP), `localhost:9000` (native) |
+| Prometheus (profile `obs`) | http://localhost:9090 |
+| Grafana (profile `obs`) | http://localhost:3000 (`admin` / `admin`) |
+
+Cổng quy ước cho service chạy trên máy host: ingest 8080, query 8081, processor 8082, alert 8083. Thông tin đăng nhập trong `.env.example` chỉ dành cho dev.
+
 ## Nguyên tắc xuyên suốt
 
 1. **Thiết kế theo hướng microservices, triển khai và tách dần** theo từng giai đoạn.
