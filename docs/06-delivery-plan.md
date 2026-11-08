@@ -23,9 +23,11 @@ Mốc quan trọng đầu tiên: **một event đi từ SDK tới ClickHouse**, 
 
 **Mục tiêu:** có nền tảng để làm việc như một đội: organization, template, CI mẫu, hạ tầng dev, các ADR đầu tiên.
 
-- [ ] Tạo GitHub Organization, cấu hình bảo mật ([07](07-github-setup.md))
-- [ ] Repo `.github`: profile, template issue/PR, `CONTRIBUTING`, `SECURITY`, reusable workflows (`go-ci`, `node-ci`, `docker-publish`, `proto-ci`)
-- [ ] Repo `infra`: tài liệu này, `docker-compose.yml` (Kafka KRaft, ClickHouse, Redis, Postgres, Kafka UI, Prometheus, Grafana), `Makefile`, script bootstrap
+- [x] Tạo GitHub Organization, cấu hình bảo mật ([07](07-github-setup.md))
+- [x] Repo `.github`: profile, template PR, reusable workflow `go-ci`
+- [ ] Repo `.github`: template issue, `CONTRIBUTING`, `SECURITY`, workflows `node-ci`, `docker-publish`, `proto-ci`
+- [x] Repo `infra`: tài liệu thiết kế, script bootstrap
+- [x] Repo `infra`: `docker-compose.yml` (Kafka KRaft, Kafka UI, Redis; profile `db`: Postgres, ClickHouse; profile `obs`: Prometheus, Grafana), `Makefile`, smoke test
 - [ ] Repo `contracts`: khung Protobuf `Event`, `buf.yaml`, `buf.gen.yaml`, CI `buf lint` và `buf breaking`, tag `v0.1.0`
 - [ ] GitHub Project (Roadmap), nhãn, milestone P1-P5
 - [ ] Chạy spike S1, S3 (cần cho Phase 1) và ghi kết quả vào ADR
